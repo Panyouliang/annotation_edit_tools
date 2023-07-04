@@ -1,4 +1,21 @@
-import sys
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import sys,gzip,argparse
+#================================================================================
+version = "v1.0"
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='''
+======================================================================
+This is a script for transform gtf to gff file.
+Author: Panyouliang, panyouliang@genomics.cn
+Version: v1.0
+Date: 2023-07-03, yyyy-mm-dd
+======================================================================''')
+parser.add_argument('-v', '--version', action='version', version=version)
+parser.add_argument('-filelist', metavar='The path list', type=str, required=True, help='Please input the path file')
+#parser.add_argument('-sp', metavar='Specie name', type=str, required=True, help='Please input the Specie name')
+args = parser.parse_args()
+#================================================================================
 
 
 def read_gff(F,UTR5,UTR3):
@@ -58,7 +75,7 @@ def merge_utr_locus(dicts):
 
 
 def main():
-    f = sys.argv[1]
+    f = args.filelist
     UTR5,UTR3 = {},{}
     for input_f in open(f,'r'):
         F = input_f.strip()
