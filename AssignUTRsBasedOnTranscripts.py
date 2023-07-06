@@ -9,16 +9,16 @@ import numpy as np
 version = "v1.0"
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='''
 ================================================================
-This is a script for evaluating the quality of genome annotation.
+This is a script for extended UTR from stringtie assemble sequence.
 
 Author: Panyouliang, panyouliang@genomics.cn
 Version: v1.0
 Date: 2023-07-04, yyyy-mm-dd
 ================================================================''')
 parser.add_argument('-v', '--version', action='version', version=version)
-parser.add_argument('-core_gff', metavar='annotation file', type=str, required=True, help='Please input the annotation file(Select Top length isoforms before input)')
-parser.add_argument('-Iso_gff',  metavar='genome file', type=str, required=True, help='Please input the stringtie assemble file of ISO-seq(gff format)')
-parser.add_argument('-ngs_gff',  metavar='genome file', type=str, required=False, help='Please input the stringtie assemble file of RNA-seq(gff format)')
+parser.add_argument('-coregff', metavar='annotation file', type=str, required=True, help='Please input the annotation file(Select Top length isoforms before input)')
+parser.add_argument('-Isogff',  metavar='genome file', type=str, required=True, help='Please input the stringtie assemble file of ISO-seq(gff format)')
+parser.add_argument('-ngsgff',  metavar='genome file', type=str, required=False, help='Please input the stringtie assemble file of RNA-seq(gff format)')
 parser.add_argument('-sp', metavar='Specie name', type=str, required=False, default="husky", help='Please input the Specie name')
 args = parser.parse_args()
 #=================================================================================
@@ -113,7 +113,7 @@ def stat_overlap(gff1,gff2):
 
     cdsgID2exongID = {}
 
-    result = subprocess.run(['perl', '/ldfssz1/ST_EARTH/P18Z10200N0107/panyouliang/my_work/00.Tools/02.Genome_Anno_evaluate/annotation_script/FindOverlapAtCDSlevel.exon.pl', gff1, gff2], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(['perl', 'FindOverlapAtCDSlevel.exon.pl', gff1, gff2], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     output = result.stdout.decode()
 
@@ -267,7 +267,7 @@ def out_print(all_gene,gene_pos,UTR5_dict,UTR3_dict,gene_tag):
 
 def main():
 
-    gff1,gff2,gff3,sp = args.core_gff,args.Iso_gff,args.ngs_gff,args.sp
+    gff1,gff2,gff3,sp = args.coregff,args.Isogff,args.ngsgff,args.sp
 
     gene_dict,gene2trans,all_gene,gene_tag,gemoma_utr5,gemoma_utr3,gemoma_utr5_lis,gemoma_utr3_lis = read_gff_CDS(gff1)
     
