@@ -17,8 +17,8 @@ Date: 2023-07-04, yyyy-mm-dd
 ================================================================''')
 parser.add_argument('-v', '--version', action='version', version=version)
 parser.add_argument('-coregff', metavar='annotation file', type=str, required=True, help='Please input the annotation file(Select Top length isoforms before input)')
-parser.add_argument('-Isogff',  metavar='genome file', type=str, required=True, help='Please input the stringtie assemble file of ISO-seq(gff format)')
-parser.add_argument('-ngsgff',  metavar='genome file', type=str, required=False, help='Please input the stringtie assemble file of RNA-seq(gff format)')
+parser.add_argument('-Isogff',  metavar='GFF file', type=str, required=True, help='Please input the stringtie assemble file of ISO-seq(gff format)')
+parser.add_argument('-ngsgff',  metavar='GFF file', type=str, required=False, help='Please input the stringtie assemble file of RNA-seq(gff format)')
 parser.add_argument('-sp', metavar='Specie name', type=str, required=False, default="husky", help='Please input the Specie name')
 args = parser.parse_args()
 #=================================================================================
